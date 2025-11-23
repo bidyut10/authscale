@@ -1,6 +1,6 @@
 {
   "name": "authscale",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "A CLI tool that creates a complete, secure, production-ready Express + MongoDB backend—REST APIs, JWT auth, validation, transactions, logging, Docker, and config included. One command and your server is ready.",
   "main": "bin/index.js",
   "bin": {
@@ -8,7 +8,7 @@
   },
   "type": "module",
   "scripts": {
-    "postinstall": "node ./bin/postinstall-message.js"
+    "preinstall": "node ./bin/prevent-install.js"
   },
   "keywords": [
     "nodejs",
@@ -65,7 +65,7 @@
     "template"
   ],
   "dependencies": {
+    "chalk": "^5.6.2",
     "fs-extra": "^11.2.0"
   }
 }
-

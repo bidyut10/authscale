@@ -10,12 +10,6 @@ You don't need to install it globally. Just use `npx`:
 npx authscale <project-name>
 ```
 
-Or with npm:
-
-```bash
-npm create authscale@latest <project-name>
-```
-
 ## Usage
 
 ```bash
@@ -48,7 +42,7 @@ After creating your project:
 ```bash
 cd <project-name>
 npm install
-cp .env.example .env  # If .env.example exists
+cp .env.example .env 
 npm run dev
 ```
 
@@ -68,7 +62,7 @@ npm run dev
 │   ├── app.js           # Express app setup
 │   └── server.js        # Server entry point
 ├── test/                # Test files
-├── docker-compose.yml    # Docker Compose setup
+├── docker-compose.yml   # Docker Compose setup
 ├── Dockerfile           # Docker configuration
 └── package.json         # Dependencies
 ```
