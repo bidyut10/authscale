@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: backend-api
+    ports:
+      - "${PORT:-4000}:4000"
+    environment:
+      - NODE_ENV=production
+      - PORT=4000
+      - MONGO_URL=mongodb://mongo:27017/backend_db
+      - JWT_SECRET=${JWT_SECRET}
+      - JWT_REFRESH_SECRET=${JWT_REFRESH_SECRET}
+      - ALLOWED_ORIGINS=${ALLOWED_ORIGINS}
+    depends_on:
+      - mongo
+    restart: unless-stopped
+    networks:
+      - backend-network
+
+  mongo:
+    image: mongo:7.0
+    container_name: backend-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    restart: unless-stopped
+    networks:
+      - backend-network
+    environment:
+      - MONGO_INITDB_DATABASE=backend_db
+
+volumes:
+  mongo-data:
+
+networks:
+  backend-network:
+    driver: bridge
+

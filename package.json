@@ -1,0 +1,71 @@
+{
+  "name": "authscale",
+  "version": "1.1.1",
+  "description": "A CLI tool that creates a complete, secure, production-ready Express + MongoDB backend—REST APIs, JWT auth, validation, transactions, logging, Docker, and config included. One command and your server is ready.",
+  "main": "bin/index.js",
+  "bin": {
+    "authscale": "./bin/index.js"
+  },
+  "type": "module",
+  "scripts": {
+    "postinstall": "node ./bin/postinstall-message.js"
+  },
+  "keywords": [
+    "nodejs",
+    "node",
+    "node-cli",
+    "cli",
+    "backend",
+    "backend-generator",
+    "backend-boilerplate",
+    "backend-template",
+    "backend-starter",
+    "project-generator",
+    "scaffolding",
+    "express",
+    "express-js",
+    "express-backend",
+    "express-generator",
+    "mongodb",
+    "mongoose",
+    "jwt",
+    "jwt-auth",
+    "authentication",
+    "auth",
+    "auth-cli",
+    "auth-generator",
+    "mern-backend",
+    "rest-api",
+    "api-generator",
+    "api-boilerplate",
+    "fullstack",
+    "developer-tools",
+    "npm-cli-tool",
+    "create-backend",
+    "template-generator",
+    "production-ready",
+    "zero-config",
+    "project-setup",
+    "starter-template",
+    "code-generator"
+  ],
+  "author": "Bidyut Kundu",
+  "license": "MIT",
+  "homepage": "https://www.npmjs.com/package/authscale",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bidyut10/authscale"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "files": [
+    "bin",
+    "template"
+  ],
+  "dependencies": {
+    "fs-extra": "^11.2.0"
+  }
+}
+

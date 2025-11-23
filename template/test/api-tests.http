@@ -1,0 +1,137 @@
+### REST Client Tests for VS Code
+### Install REST Client extension to use these tests
+### Or use with any HTTP client that supports this format
+
+### Load from .env or use defaults
+@port = 4000
+@apiPrefix = /api/v1
+@baseUrl = http://localhost:{{port}}{{apiPrefix}}
+@token = your-token-here
+
+### Health Check
+GET {{baseUrl}}/health
+
+### Register User - Valid
+POST {{baseUrl}}/users/register
+Content-Type: application/json
+
+{
+  "email": "test@example.com",
+  "name": "Test User",
+  "password": "Test1234"
+}
+
+### Register User - Invalid Email
+POST {{baseUrl}}/users/register
+Content-Type: application/json
+
+{
+  "email": "not-an-email",
+  "name": "Test User",
+  "password": "Test1234"
+}
+
+### Register User - Weak Password
+POST {{baseUrl}}/users/register
+Content-Type: application/json
+
+{
+  "email": "test2@example.com",
+  "name": "Test User",
+  "password": "weak"
+}
+
+### Register User - Missing Fields
+POST {{baseUrl}}/users/register
+Content-Type: application/json
+
+{
+  "email": "test3@example.com"
+}
+
+### Login - Valid
+POST {{baseUrl}}/users/login
+Content-Type: application/json
+
+{
+  "email": "test@example.com",
+  "password": "Test1234"
+}
+
+### Login - Wrong Password
+POST {{baseUrl}}/users/login
+Content-Type: application/json
+
+{
+  "email": "test@example.com",
+  "password": "WrongPassword"
+}
+
+### Login - Missing Email
+POST {{baseUrl}}/users/login
+Content-Type: application/json
+
+{
+  "password": "Test1234"
+}
+
+### Get Profile - Without Token (Should Fail)
+GET {{baseUrl}}/users/profile
+
+### Get Profile - With Invalid Token (Should Fail)
+GET {{baseUrl}}/users/profile
+Authorization: Bearer invalid-token-12345
+
+### Get Profile - With Valid Token (Replace token first)
+GET {{baseUrl}}/users/profile
+Authorization: Bearer {{token}}
+
+### Update Profile - With Valid Token
+PUT {{baseUrl}}/users/profile
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "Updated Name"
+}
+
+### Logout - With Valid Token
+POST {{baseUrl}}/users/logout
+Authorization: Bearer {{token}}
+
+### Delete Account - With Valid Token (Soft Delete)
+DELETE {{baseUrl}}/users/account
+Authorization: Bearer {{token}}
+
+### Delete Account - Without Token (Should Fail)
+DELETE {{baseUrl}}/users/account
+
+### Delete Account - With Invalid Token (Should Fail)
+DELETE {{baseUrl}}/users/account
+Authorization: Bearer invalid-token-12345
+
+### Security Test - NoSQL Injection Attempt
+POST {{baseUrl}}/users/login
+Content-Type: application/json
+
+{
+  "email": {"$ne": null},
+  "password": {"$ne": null}
+}
+
+### Security Test - XSS Attempt
+POST {{baseUrl}}/users/register
+Content-Type: application/json
+
+{
+  "email": "testxss@example.com",
+  "name": "<script>alert('xss')</script>",
+  "password": "Test1234"
+}
+
+### Test 404 Route
+GET {{baseUrl}}/nonexistent-route
+
+### Test Rate Limiting (Run this multiple times quickly)
+GET {{baseUrl}}/health
+
