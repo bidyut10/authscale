@@ -1,6 +1,12 @@
 #!/usr/bin/env node
 
-import chalk from "chalk";
+// ANSI color codes
+const red = "\x1b[31m";
+const green = "\x1b[32m";
+const yellow = "\x1b[33m";
+const cyan = "\x1b[36m";
+const magenta = "\x1b[35m";
+const reset = "\x1b[0m";
 
 // Detect if user is trying to INSTALL instead of RUNNING the CLI
 const isInstalling =
@@ -9,18 +15,17 @@ const isInstalling =
 
 if (isInstalling) {
    console.log(`
-${chalk.red.bold("✖ Wrong Installation Command!")}
+${red}✖ Wrong Installation Command!${reset}
 
-${chalk.yellow("AuthScale is a CLI tool — not a dependency library.")}
+${yellow}AuthScale is a CLI tool — not a dependency library.${reset}
 
-${chalk.green("Correct usage:")}
-   ${chalk.cyan("npx authscale <project-name>")}
+${green}Correct usage:${reset}
+   ${cyan}npx authscale <project-name>${reset}
 
-${chalk.green("Examples:")}
+${green}Examples:${reset}
    npx authscale my-backend
-   npm create authscale my-app
 
-${chalk.magenta("Do NOT install using:")}
+${magenta}Do NOT install using:${reset}
    npm install authscale
    npm authscale my-backend
 `);
